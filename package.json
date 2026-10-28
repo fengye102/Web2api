@@ -1,0 +1,17 @@
+{
+  "name": "web2api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "probe": "node src/cli.ts probe",
+    "discover": "node src/cli.ts discover",
+    "hunt": "node src/cli.ts hunt",
+    "harvest": "node src/cli.ts harvest",
+    "serve": "node src/cli.ts serve",
+    "mock": "node scripts/mock-site.mjs"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "port": 8787,
+  "host": "127.0.0.1",
+  "api_key": "sk-w2a-change-me",
+  "default_upstream": "uhelp-cookie",
+  "cors_origin": "*",
+  "model_aliases": {
+    "gpt-4o-mini": "claude-haiku-4-5-20251001",
+    "gpt-4o": "claude-sonnet-4-6"
+  },
+  "limits": {
+    "rpm": 120,
+    "max_concurrency": 8,
+    "max_body_bytes": 2097152,
+    "request_timeout_ms": 180000,
+    "upstream_attempts": 3
+  },
+  "builtin": {
+    "uhelp": false,
+    "aethyro_account": false,
+    "aethyro_trial": false,
+    "echo": true
+  },
+  "upstreams": [
+    {
+      "id": "uhelp-cookie",
+      "label": "uhelp.ai /api/chat (cookie 会话)",
+      "enabled": true,
+      "models": [
+        "claude-opus-5-5",
+        "claude-opus-5",
+        "claude-sonnet-4-6",
+        "claude-haiku-4-5-20251001",
+        "gpt-5.5"
+      ],
+      "base_url": "https://www.uhelp.ai",
+      "chat_path": "/api/chat",
+      "method": "POST",
+      "headers": {
+        "cookie": "__Secure-better-auth.session_token=把这里换成你的会话",
+        "origin": "https://www.uhelp.ai",
+        "referer": "https://www.uhelp.ai/chat",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+      },
+      "body": {
+        "model": "{{model}}",
+        "messages": "{{messages}}"
+      },
+      "response_kind": "sse-openai",
+      "stream_by_default": true,
+      "timeout_ms": 120000
+    },
+    {
+      "id": "aethyro-trial",
+      "label": "Aethyro 匿名试用（supabase edge function，3 条/天/IP）",
+      "enabled": false,
+      "models": [
+        "claude-opus-5"
+      ],
+      "base_url": "https://uzmdqbtflcpikjdrggqc.supabase.co",
+      "chat_path": "/functions/v1/trial-chat",
+      "method": "POST",
+      "headers": {
+        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6bWRxYnRmbGNwaWtqZHJnZ3FjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2ODQxOTgsImV4cCI6MjA5MTI2MDE5OH0.BwNVBJCbw9SG-ge7PfmoIW8q_33k-ZQlqpDHa2HrvHI"
+      },
+      "body": {
+        "message": "{{prompt}}"
+      },
+      "response_kind": "text",
+      "timeout_ms": 90000
+    },
+    {
+      "id": "any-openai-compatible",
+      "label": "任意 OpenAI 兼容站点（Bearer token）",
+      "enabled": false,
+      "models": [
+        "gpt-4o-mini"
+      ],
+      "base_url": "https://api.example.com/v1",
+      "chat_path": "/chat/completions",
+      "method": "POST",
+      "auth": {
+        "header": "authorization",
+        "prefix": "Bearer ",
+        "token": "sk-xxx"
+      },
+      "body": {
+        "model": "{{model}}",
+        "messages": "{{messages}}",
+        "stream": "{{stream}}"
+      },
+      "response_kind": "sse-openai",
+      "timeout_ms": 120000
+    }
+  ],
+  "log_file": "data/logs/gateway.log",
+  "log_level": "info"
+}

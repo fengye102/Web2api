@@ -1,0 +1,11 @@
+node_modules/
+data/state/
+data/accounts.json
+data/config.json
+data/logs/
+data/reports/
+*.log
+*.html
+.local/
+data/sites/
+.DS_Store

@@ -1,0 +1,103 @@
+[
+  {
+    "domain": "palvoro.com",
+    "url": "https://www.palvoro.com/",
+    "credits": "15000 credits",
+    "models": [
+      "claude-opus-4-5",
+      "gpt-6-astra",
+      "gemini-3.1-pro-preview",
+      "deepseek-v4-pro"
+    ],
+    "why": "verified: /api/settings/credits exposes signup_bonus_credits",
+    "confidence": 0.9,
+    "source": "verified",
+    "probed": {
+      "score": 48,
+      "verdict": "partial",
+      "auth": "supabase",
+      "chat_endpoint": "https://api.anthropic.com/v1/messages",
+      "models_found": [
+        "claude-opus-4-8",
+        "claude-sonnet-5",
+        "deepseek-v4-flash",
+        "deepseek-v4-pro",
+        "gemini-3.1-pro-preview",
+        "gemini-3.7-flash",
+        "gpt-5.6-terra",
+        "gpt-6-astra"
+      ],
+      "gating": [],
+      "free_credit_hints": [
+        "Simple credits, no subscription $1 = 10,000 credits Buy credits as needed, on the go.",
+        "10 % extra on your first top-up Your first paid top-up gets 10 % extra credits on any amount: $ 5 becomes 55,000 credits…"
+      ]
+    }
+  },
+  {
+    "domain": "aethyro.com",
+    "url": "https://aethyro.com/",
+    "credits": "200 credits + anonymous trial",
+    "models": [
+      "claude-opus-5"
+    ],
+    "why": "verified: anonymous trial-chat works, signup bonus",
+    "confidence": 0.95,
+    "source": "verified",
+    "probed": {
+      "score": 40,
+      "verdict": "partial",
+      "auth": "supabase",
+      "chat_endpoint": "https://uzmdqbtflcpikjdrggqc.supabase.co/functions/v1/trial-chat",
+      "models_found": [],
+      "gating": [
+        "cloudflare-front",
+        "cf-jsd-challenge"
+      ],
+      "free_credit_hints": [
+        "Start free — 200 credits, no card → Why Aethyro One assistant.",
+        "Start free with 200 credits — no card required.",
+        "Start free with 200 credits."
+      ]
+    }
+  },
+  {
+    "domain": "superapp.chat",
+    "url": "https://superapp.chat/",
+    "credits": "5000 quota",
+    "models": [
+      "multi-model"
+    ],
+    "why": "auth0 gated, /api/v1/models returns 401",
+    "confidence": 0.6,
+    "source": "verified",
+    "probed": {
+      "score": 16,
+      "verdict": "hard",
+      "auth": "auth0",
+      "chat_endpoint": "https://superapp.chat",
+      "models_found": [],
+      "gating": [],
+      "free_credit_hints": []
+    }
+  },
+  {
+    "domain": "uhelp.ai",
+    "url": "https://www.uhelp.ai/",
+    "credits": "1000 credits",
+    "models": [
+      "multi-model"
+    ],
+    "why": "verified: better-auth signup page says 1,000 free credits",
+    "confidence": 0.85,
+    "source": "verified",
+    "probed": {
+      "score": 10,
+      "verdict": "hard",
+      "auth": "nextjs",
+      "models_found": [],
+      "gating": [],
+      "free_credit_hints": []
+    }
+  }
+]
